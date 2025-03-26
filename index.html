@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Website</title>
+  <!-- Import Montserrat font with weights: Medium (500), Semi Bold (600), Black (900) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;900&display=swap" rel="stylesheet">
+  <style>
+    /* Center body content vertically and horizontally */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: url('bg.png'); /* Replace with your background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    /* Container without a box behind the body content */
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
+    }
+    
+    /* Main heading: Montserrat, Black (900), #40a3a2, increased size */
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: #40a3a2;
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    
+    /* Sub-heading (venue): Montserrat, Medium (500), #222222, decreased size */
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      color: #222222;
+      font-size: 1.4em;
+      margin-bottom: 20px;
+    }
+    
+    /* Countdown section using Montserrat */
+    #countdown {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5em;
+    }
+    
+    /* Style for each countdown value as a square, increased size and number font-size */
+    .countdown-value {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      margin-left: 15px;
+      margin-right: 15px;
+      background-color: #40a3a2; /* Countdown box colour */
+      border-radius: 4px;
+      font-weight: 900; /* Numbers: Montserrat Black */
+      color: #ffffff;
+      font-size: 2em;
+    }
+    
+    /* Label below each number for "Day", "Hour", "Min", "Sec" with reduced gap */
+    .countdown-label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.5em;
+      margin-top: 0px;
+      color: #40a3a2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SOMETHING BIG IS <br> COMING UP!</h1>
+    <h2>Venue - Canteen</h2>
+    <div id="countdown">
+      <span class="countdown-value" id="days"></span>
+       <span class="countdown-value" id="hours"></span>
+       <span class="countdown-value" id="minutes"></span>
+       <span class="countdown-value" id="seconds"></span>
+    </div>
+  </div>
+  
+  <script>
+    // Set the target date and time (update if necessary)
+    var countDownDate = new Date("April 2, 2025 12:00:00").getTime();
+    
+    // Update the countdown every second
+    var countdownFunction = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      
+      // Calculate time components
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      // Update countdown values with labels
+      document.getElementById("days").innerHTML = days + "<div class='countdown-label'>Day</div>";
+      document.getElementById("hours").innerHTML = hours + "<div class='countdown-label'>Hour</div>";
+      document.getElementById("minutes").innerHTML = minutes + "<div class='countdown-label'>Min</div>";
+      document.getElementById("seconds").innerHTML = seconds + "<div class='countdown-label'>Sec</div>";
+      
+      // If the countdown is finished, display a message
+      if (distance < 0) {
+        clearInterval(countdownFunction);
+        document.getElementById("countdown").innerHTML = "The event has started!";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
